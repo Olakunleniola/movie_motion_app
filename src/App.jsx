@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Search from './components/Search'
 
 const App = () => {
   const [search, setSearch] = useState('')
@@ -11,6 +12,11 @@ const App = () => {
             <img src="/hero.png" alt="logo" className='' />
             <h1> Find <span className='text-gradient'>Movies </span> You'll Love</h1>
           </header>
+          <div className='trending'>trending .... </div>
+          <Search search={search} setSearch={setSearch} />
+          <div className='all-movies text-white'>
+            {search}
+          </div>
         </div>
       </div>
     </main>
