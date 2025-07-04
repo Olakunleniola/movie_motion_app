@@ -38,6 +38,7 @@
   main {
     @apply min-h-screen relative bg-primary;
   }
+  
 
   header {
     @apply sm:mt-10 mt-5;
@@ -50,7 +51,11 @@
 
 @layer components {
   .pattern {
-    @apply bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0;
+    @apply bg-hero-pattern w-full h-screen bg-center bg-cover absolute z-0;
+  }
+
+  .app-logo {
+    @apply w-20 max-w-lg h-auto object-contain mx-auto drop-shadow-md;
   }
 
   .wrapper {

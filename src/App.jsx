@@ -1,18 +1,19 @@
-import React from 'react'
+import { useState } from 'react'
 
 const App = () => {
+  const [search, setSearch] = useState('')
   return (
-    <div>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-      <h1 className='text-white'>Hello World</h1>
-
-    </div>
+    <main>
+      <div className='pattern'>
+        <div className='wrapper'>
+          <img src="/movie_motion.png" alt="logo" className='app-logo' />
+          <header>
+            <img src="/hero.png" alt="logo" className='' />
+            <h1> Find <span className='text-gradient'>Movies </span> You'll Love</h1>
+          </header>
+        </div>
+      </div>
+    </main>
   )
 }
 
