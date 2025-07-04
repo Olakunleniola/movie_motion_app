@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Search from './components/Search'
 import Loader from './components/Loader';
 import MovieCard from './components/moviecard';
+import { useDebounce } from 'use-debounce';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -11,13 +12,14 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [debouncedSearch] = useDebounce(search, 500);
 
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       setErrorMessage('');
       try {
-        const endpoint = search ? `${API_URL}/search/movie?query=${encodeURIComponent(search)}` : `${API_URL}/discover/movie?sort_by=popularity.desc`
+        const endpoint = debouncedSearch ? `${API_URL}/search/movie?query=${encodeURIComponent(debouncedSearch)}` : `${API_URL}/discover/movie?sort_by=popularity.desc`
 
         const response = await fetch(endpoint, {
           method: "GET",
@@ -37,7 +39,7 @@ const App = () => {
       }
     }
     fetchMovies()
-  }, [search])
+  }, [debouncedSearch])
 
   return (
     <main>
@@ -55,7 +57,7 @@ const App = () => {
           <section className='all-movies'>
             <h2>All Movies</h2>
             {loading ? <Loader /> :
-              errorMessage ? <p>{errorMessage}</p> :
+              errorMessage ? <p className='text-red-500'>{errorMessage}</p> :
                 (<ul>
                   {movies &&
                     movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
