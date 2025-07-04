@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Search from './components/Search'
 import Loader from './components/Loader';
+import MovieCard from './components/moviecard';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -53,13 +54,11 @@ const App = () => {
           </section>
           <section className='all-movies'>
             <h2>All Movies</h2>
-            {!loading ? <Loader/> :
+            {loading ? <Loader /> :
               errorMessage ? <p>{errorMessage}</p> :
                 (<ul>
                   {movies &&
-                    movies.map((movie) => <li className='movie-card text-white' key={movie.id}>
-                      {movie.title}
-                    </li>)
+                    movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
                   }
                 </ul>)
             }
