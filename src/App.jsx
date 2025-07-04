@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Search from './components/Search'
+import Loader from './components/Loader';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -52,7 +53,7 @@ const App = () => {
           </section>
           <section className='all-movies'>
             <h2>All Movies</h2>
-            {loading ? <p>Loading..... </p> :
+            {!loading ? <Loader/> :
               errorMessage ? <p>{errorMessage}</p> :
                 (<ul>
                   {movies &&
